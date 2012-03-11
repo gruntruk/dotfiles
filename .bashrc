@@ -39,8 +39,6 @@ grb_git_prompt() {
         echo ${GIT_PROMPT}
     fi
 }
-#PS1="\h:\W\$(grb_git_prompt) \u\$ "
-#PS1="\[\033[37m\]\w\$(grb_git_prompt) \u\$ "
-PS1="${BLUE}\w\$(grb_git_prompt) \u\$ "
+PS1="\h:\W\$(grb_git_prompt) \u\$ "
 
 source ~/bin/git-completion.bash
