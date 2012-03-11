@@ -3,6 +3,7 @@ eval "$(rbenv init -)"
 export PATH="~/bin:$PATH"
 
 # color settings
+. ~/bin/bash_colors.sh
 export CLICOLOR=1
 export TERM='xterm-color'
 export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
