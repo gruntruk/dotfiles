@@ -25,6 +25,9 @@ cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
 map <leader>v :view %%
 
+" clear search
+nnoremap <CR> :noh<CR><CR>
+
 " no cheating
 map <Left> :echo "no!"<cr>
 map <Right> :echo "no!"<cr>
