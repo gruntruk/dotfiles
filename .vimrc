@@ -10,6 +10,9 @@ set incsearch
 set hlsearch
 set laststatus=2
 
+" change buffers without warning
+set hidden
+
 " backup settings
 set backup
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
