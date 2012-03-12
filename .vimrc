@@ -9,6 +9,13 @@ set showmatch
 set incsearch
 set hlsearch
 set laststatus=2
+set number
+" always show ruler
+set ruler=2
+" use emacs-style tab completion when selecting files, etc
+set wildmode=longest,list
+" make tab completion for files/buffers act like bash
+set wildmenu
 
 " change buffers without warning
 set hidden
