@@ -25,6 +25,9 @@ cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
 map <leader>v :view %%
 
+" switch between last two files
+nnoremap <leader><leader> <c-^>
+
 " clear search
 nnoremap <CR> :noh<CR><CR>
 
