@@ -27,6 +27,9 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 " integrate with OS clipboard
 set clipboard=unnamed
 
+" Intuitive backspacing in insert mode
+set backspace=indent,eol,start
+
 syntax on
 filetype plugin indent on
 
