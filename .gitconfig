@@ -1,0 +1,15 @@
+[user]
+	name = Kristofer Goss
+	email = krsgoss@gmail.com
+[color]
+	ui = always
+[diff]
+[alias]
+	amend = commit --amend
+	b = branch
+	b = branch
+	ci = commit
+	co = checkout
+	dc = diff --cached
+	di = diff
+	st = status
