@@ -9,6 +9,7 @@ export TERM='xterm-color'
 export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
 export GREP_OPTIONS="--color"
 alias ls='ls -G'
+alias tree='tree -C'
 
 # no dupes in history
 export HISTCONTROL=erasedups
