@@ -24,6 +24,9 @@ set backup
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
+" integrate with OS clipboard
+set clipboard=unnamed
+
 syntax on
 filetype plugin indent on
 
