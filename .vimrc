@@ -62,3 +62,9 @@ map <leader>gp :CommandTFlush<cr>\|:CommandT public<cr>
 
 " escape to clear command-t
 let g:CommandTCancelMap=['<ESC>','<C-c>']
+
+" restore cursor position
+autocmd BufReadPost *
+	\ if line("'\"") > 1 && line("'\"") <= line("$") |
+	\   exe "normal! g`\"" |
+	\ endif
