@@ -85,6 +85,7 @@
 /bin/rvm-prompt
 /bin/rvm-shell
 /bin/rvmsudo
+/bin/mvim
 /blog
 /desktop_temp
 /doc
