@@ -25,6 +25,7 @@ function __rbenv_current {
 	rbenv version | cut -d ' ' -f 1
 }
 
-PS1="$BRIGHT_RED$(__rbenv_current)$NONE \h:\w$BRIGHT_GREEN\$(__git_ps1) $NONE\$(__git_dirty) $ "
+# PS1="$BRIGHT_RED$(__rbenv_current)$NONE \h:\w$BRIGHT_GREEN\$(__git_ps1) $NONE\$(__git_dirty) $ "
+PS1="$(__rbenv_current) \h:\w\$(__git_ps1) \$(__git_dirty) $ "
 
 source ~/bin/git-completion.bash
