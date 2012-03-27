@@ -6,8 +6,9 @@ export PATH="~/bin:$PATH"
 . ~/bin/bash_colors.sh
 export CLICOLOR=1
 export TERM='xterm-color'
-# export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
+export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
 export GREP_OPTIONS="--color"
+
 alias ls='ls -G'
 alias tree='tree -C'
 
