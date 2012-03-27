@@ -20,6 +20,10 @@ function __git_dirty {
 	[ $? == 1 ] && echo "!"
 }
 
-PS1="\h:\w$BRIGHT_GREEN\$(__git_ps1) $RESET\$(__git_dirty) $ "
+function __rbenv_current {
+	rbenv version | cut -d ' ' -f 1
+}
+
+PS1="$BRIGHT_RED$(__rbenv_current)$RESET \h:\w$BRIGHT_GREEN\$(__git_ps1) $RESET\$(__git_dirty) $ "
 
 source ~/bin/git-completion.bash
