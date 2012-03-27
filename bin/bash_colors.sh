@@ -29,6 +29,7 @@ BG_NULL=00
 ESC="\033"
 NORMAL="$ESC[m"
 RESET="$ESC[${DULL};${FG_WHITE};${BG_NULL}m"
+NONE="\[\033[0m\]"
 
 BLACK="$ESC[${DULL};${FG_BLACK}m"
 RED="$ESC[${DULL};${FG_RED}m"
