@@ -11,6 +11,7 @@ export GREP_OPTIONS="--color"
 
 alias ls='ls -G'
 alias tree='tree -C'
+alias r='bundle exec rails'
 
 # no dupes in history
 export HISTCONTROL=erasedups
