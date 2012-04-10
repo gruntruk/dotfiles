@@ -68,9 +68,14 @@ map <leader>gp :CommandTFlush<cr>\|:CommandT public<cr>
 
 " escape to clear command-t
 let g:CommandTCancelMap=['<ESC>','<C-c>']
+set wildignore+=vendor/assets/**,tmp/**
 
 " restore cursor position
 autocmd BufReadPost *
 	\ if line("'\"") > 1 && line("'\"") <= line("$") |
 	\   exe "normal! g`\"" |
 	\ endif
+
+
+au BufNewFile,BufRead *.mxml set filetype=mxml
+au BufNewFile,BufRead *.as set filetype=actionscript
