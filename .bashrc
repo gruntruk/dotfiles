@@ -1,6 +1,7 @@
 eval "$(rbenv init -)"
 
 export PATH="~/bin:$PATH"
+export PATH="~/Library/Developer/SDKs/flex_sdk_3.6/bin:$PATH"
 
 # color settings
 . ~/bin/bash_colors.sh
@@ -10,6 +11,7 @@ export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
 export GREP_OPTIONS="--color"
 
 alias ls='ls -G'
+alias ll='ls -lahG'
 alias tree='tree -C'
 alias r='bundle exec rails'
 
