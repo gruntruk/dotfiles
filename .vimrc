@@ -37,6 +37,7 @@ let mapleader=","
 
 " open files in current directory of current file
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
+cnoremap ## <C-R>=expand('%:p')<cr>
 map <leader>e :edit %%
 map <leader>v :view %%
 
