@@ -4,6 +4,8 @@
 [color]
 	ui = always
 [diff]
+[branch]
+	autosetuprebase = always
 [alias]
 	amend = commit --amend
 	b = branch
@@ -13,3 +15,4 @@
 	dc = diff --cached
 	di = diff
 	st = status
+	p = pull
