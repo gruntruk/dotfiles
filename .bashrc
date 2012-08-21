@@ -14,6 +14,7 @@ alias ls='ls -G'
 alias ll='ls -lahG'
 alias tree='tree -C'
 alias r='bundle exec rails'
+alias less='less -r' # color support
 
 # no dupes in history
 export HISTCONTROL=erasedups

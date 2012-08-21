@@ -77,7 +77,7 @@ autocmd BufReadPost *
 	\   exe "normal! g`\"" |
 	\ endif
 
-
 au BufNewFile,BufRead *.mxml set filetype=mxml
 au BufNewFile,BufRead *.as set filetype=actionscript
 au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+au BufNewFile,BufReadPost *.eco setl shiftwidth=2 expandtab
