@@ -11,6 +11,8 @@ set hlsearch
 set laststatus=2
 set number
 set ruler
+set textwidth=80
+
 " use emacs-style tab completion when selecting files, etc
 set wildmode=longest,list
 " make tab completion for files/buffers act like bash
@@ -67,9 +69,17 @@ map <leader>gh :CommandTFlush<cr>\|:CommandT app/helpers<cr>
 map <leader>gl :CommandTFlush<cr>\|:CommandT lib<cr>
 map <leader>gp :CommandTFlush<cr>\|:CommandT public<cr>
 
+" run current file spec
+map <leader>ss<cr>\|!rspec expand('%:p')<cr>
+
 " escape to clear command-t
 let g:CommandTCancelMap=['<ESC>','<C-c>']
+let g:CommandTSelectPrevMap=['<C-p>', '<C-k>', '<Esc>OA', '<Up>'] 
+let g:CommandTSelectNextMap=['<C-p>', '<C-j>', '<Esc>OA', '<Down>'] 
+
 set wildignore+=vendor/assets/**,tmp/**
+
+map <leader>r 
 
 " restore cursor position
 autocmd BufReadPost *
@@ -81,3 +91,6 @@ au BufNewFile,BufRead *.mxml set filetype=mxml
 au BufNewFile,BufRead *.as set filetype=actionscript
 au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 au BufNewFile,BufReadPost *.eco setl shiftwidth=2 expandtab
+
+set background=dark
+colorscheme elflord
