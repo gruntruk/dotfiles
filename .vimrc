@@ -74,12 +74,10 @@ map <leader>ss<cr>\|!rspec expand('%:p')<cr>
 
 " escape to clear command-t
 let g:CommandTCancelMap=['<ESC>','<C-c>']
-let g:CommandTSelectPrevMap=['<C-p>', '<C-k>', '<Esc>OA', '<Up>'] 
-let g:CommandTSelectNextMap=['<C-p>', '<C-j>', '<Esc>OA', '<Down>'] 
+let g:CommandTSelectPrevMap=['<C-p>', '<C-k>', '<Esc>OA', '<Up>']
+let g:CommandTSelectNextMap=['<C-n>', '<C-j>', '<Esc>OB', '<Down>']
 
 set wildignore+=vendor/assets/**,tmp/**
-
-map <leader>r 
 
 " restore cursor position
 autocmd BufReadPost *
