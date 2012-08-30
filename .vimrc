@@ -2,6 +2,7 @@ call pathogen#infect()
 
 set nocompatible
 set tabstop=4
+set expandtab
 set shiftwidth=4
 set softtabstop=4
 set autoindent
@@ -77,7 +78,7 @@ let g:CommandTCancelMap=['<ESC>','<C-c>']
 let g:CommandTSelectPrevMap=['<C-p>', '<C-k>', '<Esc>OA', '<Up>']
 let g:CommandTSelectNextMap=['<C-n>', '<C-j>', '<Esc>OB', '<Down>']
 
-set wildignore+=vendor/assets/**,tmp/**
+set wildignore+=vendor/**,tmp/**,log/**
 
 " restore cursor position
 autocmd BufReadPost *
@@ -87,8 +88,8 @@ autocmd BufReadPost *
 
 au BufNewFile,BufRead *.mxml set filetype=mxml
 au BufNewFile,BufRead *.as set filetype=actionscript
-au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
-au BufNewFile,BufReadPost *.eco setl shiftwidth=2 expandtab
+au BufNewFile,BufReadPost *.coffee setl shiftwidth=2
+au BufNewFile,BufReadPost *.eco setl shiftwidth=2
 
 set background=dark
 colorscheme elflord

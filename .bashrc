@@ -4,7 +4,6 @@ export PATH="~/bin:$PATH"
 export PATH="~/Library/Developer/SDKs/flex_sdk_3.6/bin:$PATH"
 
 # color settings
-# . ~/bin/bash_colors.sh
 export CLICOLOR=1
 export TERM='xterm-256color'
 export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
@@ -13,7 +12,8 @@ export GREP_OPTIONS="--color"
 alias ls='ls -G'
 alias ll='ls -lahG'
 alias tree='tree -C'
-alias r='bundle exec rails'
+alias be='bundle exec'
+alias r='be rails'
 alias less='less -r' # color support
 
 # no dupes in history
