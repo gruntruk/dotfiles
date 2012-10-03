@@ -28,7 +28,9 @@ set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
 " integrate with OS clipboard
-set clipboard=unnamed
+if $TMUX == ''
+    set clipboard+=unnamed
+endif
 
 " Intuitive backspacing in insert mode
 set backspace=indent,eol,start

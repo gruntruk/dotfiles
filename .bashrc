@@ -15,6 +15,7 @@ alias tree='tree -C'
 alias be='bundle exec'
 alias r='be rails'
 alias less='less -r' # color support
+alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
 
 # no dupes in history
 export HISTCONTROL=erasedups
