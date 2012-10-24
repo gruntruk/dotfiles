@@ -6,6 +6,7 @@ set expandtab
 set shiftwidth=4
 set softtabstop=4
 set autoindent
+set autoread
 set showmatch
 set incsearch
 set hlsearch
@@ -80,7 +81,7 @@ let g:CommandTCancelMap=['<ESC>','<C-c>']
 let g:CommandTSelectPrevMap=['<C-p>', '<C-k>', '<Esc>OA', '<Up>']
 let g:CommandTSelectNextMap=['<C-n>', '<C-j>', '<Esc>OB', '<Down>']
 
-set wildignore+=vendor/**,tmp/**,log/**
+set wildignore+=vendor/**,tmp/**,log/**,*.png,*.jpg,*.gif,*.swf
 
 " restore cursor position
 autocmd BufReadPost *
