@@ -94,5 +94,8 @@ au BufNewFile,BufRead *.as set filetype=actionscript
 au BufNewFile,BufReadPost *.coffee setl shiftwidth=2
 au BufNewFile,BufReadPost *.eco setl shiftwidth=2
 
+" cleanup whitespace                
+autocmd BufWritePre * :%s/\s\+$//e  
+
 set background=dark
 colorscheme elflord
