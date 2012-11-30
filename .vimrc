@@ -9,11 +9,12 @@ set autoindent
 set autoread
 set showmatch
 set incsearch
-set hlsearch
 set laststatus=2
+set hlsearch
 set number
 set ruler
 set textwidth=80
+set cursorline
 
 " use emacs-style tab completion when selecting files, etc
 set wildmode=longest,list
@@ -50,6 +51,8 @@ map <leader>v :view %%
 " switch between last two files
 nnoremap <leader><leader> <c-^>
 
+" case senstive search with capital letters
+set ignorecase smartcase
 " clear search
 nnoremap <CR> :noh<CR><CR>
 
@@ -94,8 +97,8 @@ au BufNewFile,BufRead *.as set filetype=actionscript
 au BufNewFile,BufReadPost *.coffee setl shiftwidth=2
 au BufNewFile,BufReadPost *.eco setl shiftwidth=2
 
-" cleanup whitespace                
-autocmd BufWritePre * :%s/\s\+$//e  
+" cleanup whitespace
+autocmd BufWritePre * :%s/\s\+$//e
 
 set background=dark
 colorscheme elflord

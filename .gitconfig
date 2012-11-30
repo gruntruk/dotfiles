@@ -8,6 +8,7 @@
 	autosetuprebase = always
 [alias]
 	amend = commit --amend
+    rb = rebase -p
 	b = branch
 	b = branch
 	ci = commit
