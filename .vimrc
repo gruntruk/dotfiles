@@ -84,7 +84,7 @@ let g:CommandTCancelMap=['<ESC>','<C-c>']
 let g:CommandTSelectPrevMap=['<C-p>', '<C-k>', '<Esc>OA', '<Up>']
 let g:CommandTSelectNextMap=['<C-n>', '<C-j>', '<Esc>OB', '<Down>']
 
-set wildignore+=vendor/**,tmp/**,log/**,public/assets/**,*.png,*.jpg,*.gif,*.swf
+set wildignore+=vendor/**,tmp/**,log/**,public/assets/**,coverage/**,*.png,*.jpg,*.gif,*.swf
 
 " restore cursor position
 autocmd BufReadPost *
