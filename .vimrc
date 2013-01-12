@@ -6,13 +6,15 @@ set softtabstop=2
 set tabstop=2
 set expandtab
 set autoindent
+set autoread
 set showmatch
 set incsearch
-set hlsearch
 set laststatus=2
+set hlsearch
 set number
 set ruler
 set textwidth=80
+set cursorline
 
 " use emacs-style tab completion when selecting files, etc
 set wildmode=longest,list
@@ -28,7 +30,9 @@ set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
 " integrate with OS clipboard
-set clipboard=unnamed
+if $TMUX == ''
+    set clipboard+=unnamed
+endif
 
 " Intuitive backspacing in insert mode
 set backspace=indent,eol,start
@@ -47,6 +51,8 @@ map <leader>v :view %%
 " switch between last two files
 nnoremap <leader><leader> <c-^>
 
+" case senstive search with capital letters
+set ignorecase smartcase
 " clear search
 nnoremap <CR> :noh<CR><CR>
 
@@ -78,7 +84,7 @@ let g:CommandTCancelMap=['<ESC>','<C-c>']
 let g:CommandTSelectPrevMap=['<C-p>', '<C-k>', '<Esc>OA', '<Up>']
 let g:CommandTSelectNextMap=['<C-n>', '<C-j>', '<Esc>OB', '<Down>']
 
-set wildignore+=vendor/**,tmp/**,log/**,*.o,*.obj,*.png,*.jpg,*.gif,*.ico
+set wildignore+=vendor/**,tmp/**,log/**,public/assets/**,coverage/**,*.png,*.jpg,*.gif,*.swf,*.o,*.obj
 
 " restore cursor position
 autocmd BufReadPost *
@@ -90,6 +96,9 @@ au BufNewFile,BufRead *.mxml set filetype=mxml
 au BufNewFile,BufRead *.as set filetype=actionscript
 au BufNewFile,BufReadPost *.coffee setl shiftwidth=2
 au BufNewFile,BufReadPost *.eco setl shiftwidth=2
+
+" cleanup whitespace
+autocmd BufWritePre * :%s/\s\+$//e
 
 set background=dark
 colorscheme elflord
