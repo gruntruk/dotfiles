@@ -1,10 +1,10 @@
 call pathogen#infect()
 
 set nocompatible
-set tabstop=4
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
 set expandtab
-set shiftwidth=4
-set softtabstop=4
 set autoindent
 set showmatch
 set incsearch
@@ -78,7 +78,7 @@ let g:CommandTCancelMap=['<ESC>','<C-c>']
 let g:CommandTSelectPrevMap=['<C-p>', '<C-k>', '<Esc>OA', '<Up>']
 let g:CommandTSelectNextMap=['<C-n>', '<C-j>', '<Esc>OB', '<Down>']
 
-set wildignore+=vendor/**,tmp/**,log/**
+set wildignore+=vendor/**,tmp/**,log/**,*.o,*.obj,*.png,*.jpg,*.gif,*.ico
 
 " restore cursor position
 autocmd BufReadPost *

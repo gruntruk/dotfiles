@@ -36,3 +36,6 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 export PATH=~/Library/Developer/SDKs/flex_sdk_3.6/bin:~/bin:/Users/kris/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/go/bin:/usr/local/ImageMagick/bin
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
