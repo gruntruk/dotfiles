@@ -1,5 +1,7 @@
 eval "$(rbenv init -)"
 
+platform=`whoami`
+
 export PATH="~/bin:$PATH"
 export PATH="~/Library/Developer/SDKs/flex_sdk_3.6/bin:$PATH"
 
@@ -15,7 +17,10 @@ alias tree='tree -C'
 alias be='bundle exec'
 alias r='be rails'
 alias less='less -r' # color support
-alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
+
+if [[ $platform == 'Darwin' ]]; then
+  alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
+fi
 
 # no dupes in history
 export HISTCONTROL=erasedups
