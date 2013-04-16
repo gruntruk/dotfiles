@@ -1,6 +1,6 @@
 eval "$(rbenv init -)"
 
-platform=`whoami`
+platform=`uname`
 
 export PATH="~/bin:$PATH"
 export PATH="~/Library/Developer/SDKs/flex_sdk_3.6/bin:$PATH"
@@ -10,8 +10,9 @@ export CLICOLOR=1
 export TERM='xterm-256color'
 export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
 export GREP_OPTIONS="--color"
+export GIT_EDITOR="vim"
 
-alias ls='ls -G'
+alias ls='ls -G --color'
 alias ll='ls -lahG'
 alias tree='tree -C'
 alias be='bundle exec'
