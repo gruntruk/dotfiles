@@ -3,7 +3,7 @@
 	url = https://github.com/kchmck/vim-coffee-script.git
 [submodule ".vim/bundle/vim-commentary"]
 	path = .vim/bundle/vim-commentary
-	url = git://github.com/tpope/vim-commentary.git
+	url = https://github.com/tpope/vim-commentary.git
 [submodule ".vim/bundle/vim-haml"]
 	path = .vim/bundle/vim-haml
 	url = https://github.com/tpope/vim-haml
@@ -18,7 +18,7 @@
 	url = https://github.com/vim-ruby/vim-ruby.git
 [submodule ".vim/bundle/vim-pastie"]
 	path = .vim/bundle/vim-pastie
-	url = git://github.com/tpope/vim-pastie.git
+	url = https://github.com/tpope/vim-pastie.git
 [submodule ".vim/bundle/vim-cucumber"]
 	path = .vim/bundle/vim-cucumber
-	url = git://github.com/tpope/vim-cucumber.git
+	url = https://github.com/tpope/vim-cucumber.git
