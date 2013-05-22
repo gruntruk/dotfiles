@@ -1,23 +1,24 @@
 [user]
-	name = Kristofer Goss
-	email = krsgoss@gmail.com
+  name = Kristofer Goss
+  email = krsgoss@gmail.com
 [color]
-	ui = always
+  ui = always
 [diff]
 [branch]
-	autosetuprebase = always
+  autosetuprebase = always
 [alias]
-	amend = commit --amend
-    rb = rebase -p
-	b = branch
-	b = branch
-	ci = commit
-	co = checkout
-	dc = diff --cached
-	di = diff
-	st = status
-	p = pull
-    ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
-    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
-    la = "!git config -l | grep alias | cut -c 7-"
-    latest = "for-each-ref --sort=-committerdate --format='%(committerdate:short) %(refname:short)'"
+  amend = commit --amend
+  rb = rebase -p
+  b = branch
+  b = branch
+  ci = commit
+  co = checkout
+  dc = diff --cached
+  di = diff
+  st = status
+  p = pull
+  ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+  ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+  la = "!git config -l | grep alias | cut -c 7-"
+  latest = "for-each-ref --sort=-committerdate --format='%(committerdate:short) %(refname:short)'"
+  scrub=!git reset --hard && git clean -fd

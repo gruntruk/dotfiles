@@ -1,3 +1,6 @@
+.VimballRecord
+.vim/doc
+.vim/ruby
 *.DS_Store
 /.CFUserTextEncoding
 /.Trash
