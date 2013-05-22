@@ -1,0 +1,156 @@
+#!/usr/bin/env ruby
+
+require 'getoptlong'
+
+version = "0.0.5"
+project = ""
+env = "staging"
+
+def print_usage
+  usage = <<-END_USAGE.gsub(/^( {4})/, '')
+    scalr is a tool to perform common tasks for projects hosted in Scalr
+
+    Usage:
+      scalr [options]
+    where [options] are:
+                     --project, -p <s>:    Project name
+                         --env, -e <s>:    Set <environment>, defaults to "staging" if switch is not present
+                            --tail, -t:    Tail <environment>.log
+                       --util-services:    See running services on utility servers
+                              --deploy:    Deploy project to <environment>
+                    --deployed-version:    Check SHA of code-base in <environment>
+                         --version, -v:    Print version
+                            --help, -h:    Show this message
+  END_USAGE
+
+  example = <<-END_EXAMPLE.gsub(/^( {4})/, '')
+
+    Example:
+                                       To deploy:    ./scalr.rb --project tabs --deploy
+                          To tail log on staging:    ./scalr.rb --project tabs --tail
+                    To see deployed code version:    ./scalr.rb --project --deployed-version
+
+      To change target environment to production:    ./scalr.rb --project tabs --env production --tail
+  END_EXAMPLE
+
+  puts usage
+  puts example
+end
+
+opts = GetoptLong.new(
+  [ '--project', '-p', GetoptLong::REQUIRED_ARGUMENT ],
+  [ '--env', '-e', GetoptLong::OPTIONAL_ARGUMENT ],
+  [ '--tail', '-t', GetoptLong::NO_ARGUMENT ],
+  [ '--util-services', GetoptLong::NO_ARGUMENT ],
+  [ '--deploy', GetoptLong::NO_ARGUMENT ],
+  [ '--deployed-version', GetoptLong::NO_ARGUMENT ],
+  [ '--version', '-v', GetoptLong::NO_ARGUMENT ],
+  [ '--help', '-h', GetoptLong::NO_ARGUMENT ]
+)
+
+def show_line(line, regex=nil, keys_to_print=[])
+  unless regex
+    puts line
+  else
+    matched = regex.match(line)
+    if matched
+      if keys_to_print.empty?
+        puts line
+      else
+        if ( matched.names & keys_to_print ) == keys_to_print
+          output = ""
+          keys_to_print.map {|k|
+            output << "#{matched[k]} "
+          }
+          puts output
+        end
+      end
+    end
+  end
+end
+
+def tail_command(command, regex=nil, keys_to_print=[])
+  begin
+    IO.popen(command) {|f|
+      while line = f.gets
+        show_line(line, regex, keys_to_print)
+      end
+    }
+  rescue Exception => e
+    puts e.inspect
+  end
+end
+
+def tail_log(project, env)
+  command = "knife ssh 'applications:#{project} AND app_environment:#{env} AND instance_role:ap*' 'tail -n 100 -f /data/tabs/current/log/#{env}.log' -x deploy -i ~/.ssh/id_rsa -a ec2.public_hostname"
+
+  tail_command(command)
+end
+
+def deploy(project, env)
+  app_command = "knife ssh 'applications:#{project} AND app_environment:#{env} AND instance_role:ap*' 'sudo chef-client -j /etc/chef/chef.default.json' -x deploy -i ~/.ssh/id_rsa -a ec2.public_hostname"
+  util_command = "knife ssh 'applications:#{project} AND app_environment:#{env} AND instance_role:uti*' 'sudo chef-client -j /etc/chef/chef.default.json' -x deploy -i ~/.ssh/id_rsa -a ec2.public_hostname"
+
+  message = <<-END_MSG.gsub(/^( {4})/, '')
+    You are about to deploy, please confirm the following params:
+       project:    #{project}
+           env:    #{env}
+       app_cmd:    #{app_command}
+      util_cmd:    #{util_command}
+    Do you want to deploy? (y|n)
+  END_MSG
+
+  puts message
+  confirmed = gets.chomp.downcase
+  if confirmed == 'y' || confirmed == 'yes'
+    tail_command(app_command, /role\[staging\]|error/i)
+    tail_command(util_command, /role\[staging\]|error/i)
+  else
+    exit
+  end
+end
+
+def check_version(project, env)
+  app_command = "knife ssh 'applications:#{project} AND app_environment:#{env} AND instance_role:ap*' 'cd /data/tabs && ls -al' -x deploy -i ~/.ssh/id_rsa -a ec2.public_hostname"
+  util_command = "knife ssh 'applications:#{project} AND app_environment:#{env} AND instance_role:uti*' 'cd /data/tabs && ls -al' -x deploy -i ~/.ssh/id_rsa -a ec2.public_hostname"
+
+  tail_command(app_command, /(?<machine>.*\.amazonaws\.com).*current.*releases\/(?<sha>[a-zA-Z0-9]*)/, ["machine", "sha"])
+  tail_command(util_command, /(?<machine>.*\.amazonaws\.com).*current.*releases\/(?<sha>[a-zA-Z0-9]*)/, ["machine", "sha"])
+end
+
+def see_util_services(project, env)
+  command = "knife ssh 'applications:#{project} AND app_environment:#{env} AND instance_role:uti*' 'sudo monit summary' -x deploy -i ~/.ssh/id_rsa -a ec2.public_hostname"
+
+  tail_command(command)
+end
+
+begin
+  if ARGV.length == 0
+    print_usage
+  end
+
+  opts.each do |opt, arg|
+    case opt
+      when "--project"
+        project = arg
+      when "--env"
+        if arg != ""
+          env = arg
+        end
+      when "--tail"
+        tail_log(project, env)
+      when "--util-services"
+        see_util_services(project, env)
+      when "--deploy"
+        deploy(project, env)
+      when "--deployed-version"
+        check_version(project, env)
+      when "--version"
+        puts version
+      when "--help"
+        print_usage
+    end
+  end
+rescue Exception => e
+  puts e.inspect
+end
