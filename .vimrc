@@ -56,6 +56,16 @@ set ignorecase smartcase
 " clear search
 nnoremap <CR> :noh<CR><CR>
 
+" relative numbering
+function! g:ToggleNuMode()
+  if(&relativenumber == 1)
+    set number
+  else
+    set relativenumber
+  endif
+endfunc
+map <C-n> :call g:ToggleNuMode()<cr>
+
 " no cheating
 map <Left> :echo "no!"<cr>
 map <Right> :echo "no!"<cr>
@@ -84,7 +94,7 @@ let g:CommandTCancelMap=['<ESC>','<C-c>']
 let g:CommandTSelectPrevMap=['<C-p>', '<C-k>', '<Esc>OA', '<Up>']
 let g:CommandTSelectNextMap=['<C-n>', '<C-j>', '<Esc>OB', '<Down>']
 
-set wildignore+=vendor/**,tmp/**,log/**,public/assets/**,coverage/**,*.png,*.jpg,*.gif,*.swf,*.o,*.obj
+set wildignore+=vendor/**,tmp/**,log/**,public/assets/**,bin/**,coverage/**,*.png,*.jpg,*.gif,*.swf,*.o,*.obj
 
 " restore cursor position
 autocmd BufReadPost *
