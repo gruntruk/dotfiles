@@ -1,45 +1,10 @@
-" command-t.vim
-" Copyright 2010-2012 Wincent Colaiuta. All rights reserved.
-"
-" Redistribution and use in source and binary forms, with or without
-" modification, are permitted provided that the following conditions are met:
-"
-" 1. Redistributions of source code must retain the above copyright notice,
-"    this list of conditions and the following disclaimer.
-" 2. Redistributions in binary form must reproduce the above copyright notice,
-"    this list of conditions and the following disclaimer in the documentation
-"    and/or other materials provided with the distribution.
-"
-" THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-" ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS OR CONTRIBUTORS BE
-" LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-" CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
-" SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-" INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
-" CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-" ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-" POSSIBILITY OF SUCH DAMAGE.
+" Copyright 2010-2014 Greg Hurrell. All rights reserved.
+" Licensed under the terms of the BSD 2-clause license.
 
-if exists("g:command_t_loaded") || &cp
+if exists("g:command_t_autoloaded") || &cp
   finish
 endif
-let g:command_t_loaded = 1
-
-command CommandTBuffer call <SID>CommandTShowBufferFinder()
-command CommandTJump call <SID>CommandTShowJumpFinder()
-command CommandTTag call <SID>CommandTShowTagFinder()
-command -nargs=? -complete=dir CommandT call <SID>CommandTShowFileFinder(<q-args>)
-command CommandTFlush call <SID>CommandTFlush()
-
-if !hasmapto(':CommandT<CR>')
-  silent! nnoremap <unique> <silent> <Leader>t :CommandT<CR>
-endif
-
-if !hasmapto(':CommandTBuffer<CR>')
-  silent! nnoremap <unique> <silent> <Leader>b :CommandTBuffer<CR>
-endif
+let g:command_t_autoloaded = 1
 
 function s:CommandTRubyWarning()
   echohl WarningMsg
@@ -48,7 +13,7 @@ function s:CommandTRubyWarning()
   echohl none
 endfunction
 
-function s:CommandTShowBufferFinder()
+function commandt#CommandTShowBufferFinder()
   if has('ruby')
     ruby $command_t.show_buffer_finder
   else
@@ -56,7 +21,7 @@ function s:CommandTShowBufferFinder()
   endif
 endfunction
 
-function s:CommandTShowFileFinder(arg)
+function commandt#CommandTShowFileFinder(arg)
   if has('ruby')
     ruby $command_t.show_file_finder
   else
@@ -64,7 +29,7 @@ function s:CommandTShowFileFinder(arg)
   endif
 endfunction
 
-function s:CommandTShowJumpFinder()
+function commandt#CommandTShowJumpFinder()
   if has('ruby')
     ruby $command_t.show_jump_finder
   else
@@ -72,7 +37,15 @@ function s:CommandTShowJumpFinder()
   endif
 endfunction
 
-function s:CommandTShowTagFinder()
+function commandt#CommandTShowMRUFinder()
+  if has('ruby')
+    ruby $command_t.show_mru_finder
+  else
+    call s:CommandTRubyWarning()
+  endif
+endfunction
+
+function commandt#CommandTShowTagFinder()
   if has('ruby')
     ruby $command_t.show_tag_finder
   else
@@ -80,7 +53,7 @@ function s:CommandTShowTagFinder()
   endif
 endfunction
 
-function s:CommandTFlush()
+function commandt#CommandTFlush()
   if has('ruby')
     ruby $command_t.flush
   else
@@ -91,6 +64,10 @@ endfunction
 if !has('ruby')
   finish
 endif
+
+function CommandTListMatches()
+  ruby $command_t.list_matches
+endfunction
 
 function CommandTHandleKey(arg)
   ruby $command_t.handle_key
@@ -109,15 +86,19 @@ function CommandTAcceptSelection()
 endfunction
 
 function CommandTAcceptSelectionTab()
-  ruby $command_t.accept_selection :command => 'tabe'
+  ruby $command_t.accept_selection :command => $command_t.tab_command
 endfunction
 
 function CommandTAcceptSelectionSplit()
-  ruby $command_t.accept_selection :command => 'sp'
+  ruby $command_t.accept_selection :command => $command_t.split_command
 endfunction
 
 function CommandTAcceptSelectionVSplit()
-  ruby $command_t.accept_selection :command => 'vs'
+  ruby $command_t.accept_selection :command => $command_t.vsplit_command
+endfunction
+
+function CommandTQuickfix()
+  ruby $command_t.quickfix
 endfunction
 
 function CommandTRefresh()
@@ -144,6 +125,10 @@ function CommandTClear()
   ruby $command_t.clear
 endfunction
 
+function CommandTClearPrevWord()
+  ruby $command_t.clear_prev_word
+endfunction
+
 function CommandTCursorLeft()
   ruby $command_t.cursor_left
 endfunction
@@ -160,10 +145,16 @@ function CommandTCursorStart()
   ruby $command_t.cursor_start
 endfunction
 
+" note that we only start tracking buffers from first (autoloaded) use of Command-T
+augroup CommandTMRUBuffer
+  autocmd BufEnter * ruby CommandT::MRU.touch
+  autocmd BufDelete * ruby CommandT::MRU.delete
+augroup END
+
 ruby << EOF
   # require Ruby files
   begin
-    # prepare controller
+    require 'command-t/mru'
     require 'command-t/vim'
     require 'command-t/controller'
     $command_t = CommandT::Controller.new
