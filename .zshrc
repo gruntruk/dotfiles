@@ -39,3 +39,4 @@ export PATH=~/Library/Developer/SDKs/flex_sdk_3.6/bin:~/bin:/Users/kris/.rbenv/s
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+export PATH="$HOME/.rbenv/bin:$PATH"
